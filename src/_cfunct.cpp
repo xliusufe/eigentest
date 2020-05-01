@@ -22,7 +22,7 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
 
     try{
         int d;
-        PyArg_ParseTuple(args, "d", &d);
+        PyArg_ParseTuple(args, "i", &d);
         pyMatrix M1 = pyMatrix::Random(d,d);
         pyMatrix M = _MatrixPlus_(M1, d);
 
