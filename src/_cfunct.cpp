@@ -14,22 +14,17 @@ typedef double real_t;
 
 typedef Eigen::Matrix<real_t, Eigen::Dynamic, Eigen::Dynamic> pyMatrix;
 
-static PyObject* p_eigen_python_error(NULL);
+static PyObject* PY_EIGEN_ERROR(NULL);
 
-static PyObject *py_RandomDxDMatrix_(PyObject *self, PyObject *args) {
+static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
     PyObject* p(NULL);
     PyObject* item(NULL);    
 
     try{
-        Py_ssize_t d(0);
-
-        PyArg_ParseTuple(args, "L", &d);
-        //Matrix M = Matrix::Random(d,d);
+        int d;
+        PyArg_ParseTuple(args, "d", &d);
         pyMatrix M1 = pyMatrix::Random(d,d);
-        //Eigen::MatrixXd M = MatrixXd::Constant(d, d, 0);
-        //Eigen::MatrixXd M = MatrixXd::Random(d, d);
-        //pyMatrix M(d,d);
-        pyMatrix M = _Cov_(M1, d);
+        pyMatrix M = _MatrixPlus_(M1, d);
 
         Py_ssize_t length = d * d;
 
@@ -49,12 +44,14 @@ static PyObject *py_RandomDxDMatrix_(PyObject *self, PyObject *args) {
         }
 
     } catch (const std::exception& e) {
-        delete p; p = NULL;
-        delete item; item = NULL;
+        delete p; 
+        p = NULL;
+        delete item; 
+        item = NULL;
 
-        std::string msg = ("randomDxDMatrix failed: ");
+        std::string msg = ("MatrixPlus failed: ");
         msg += e.what();
-        PyErr_SetString(p_eigen_python_error, msg.c_str());
+        PyErr_SetString(PY_EIGEN_ERROR, msg.c_str());
     }
 
     return p;
@@ -62,11 +59,11 @@ static PyObject *py_RandomDxDMatrix_(PyObject *self, PyObject *args) {
 
 
 /* Documentations */
-static char module_docs[] = "Calculates the factorial of a large integer, which may be much greater than the maximum memory of any data type.";
-static char cfunction_docs[] = "Calculates the factorial of a large integer.";
+static char module_docs[] = "The module introduction.";
+static char cfunction_docs[] = "The function introduction.";
 
 static PyMethodDef EigenMethods[] = {
-    {"RandomDxDMatrix_",  py_RandomDxDMatrix_, METH_VARARGS, cfunction_docs},
+    {"MatrixPlus_",  py_MatrixPlus_, METH_VARARGS, cfunction_docs},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 

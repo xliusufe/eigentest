@@ -1,4 +1,4 @@
-from ._EIGENTEST import RandomDxDMatrix_
+from ._EIGENTEST import MatrixPlus_
 import numpy
 
 def generateMatrix(n):
@@ -6,6 +6,6 @@ def generateMatrix(n):
         return "n must be a positive integer!"      
     else:  
         dims = n
-        M = numpy.array(RandomDxDMatrix_(dims), order="F")
+        M = numpy.array(MatrixPlus_(dims), order="F")
         M.shape= dims,dims    
     return M

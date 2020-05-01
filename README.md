@@ -1,5 +1,5 @@
 # eigentest
-Python package "eigentest" is a toy example for package Python including Eigen of C/C++.
+Python package "eigentest" is a toy example for Python package including Eigen of C/C++.
 
 # Installation
 

@@ -1,6 +1,6 @@
 #include "cfunct.h"
 
-Eigen::MatrixXd _Cov_(Eigen::MatrixXd Data, int d)
+Eigen::MatrixXd _MatrixPlus_(Eigen::MatrixXd Data, int d)
 {
 
   Eigen::MatrixXd M = MatrixXd::Random(d,d);  

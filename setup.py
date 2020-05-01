@@ -48,7 +48,7 @@ setup (
     long_description_content_type="text/markdown",
     packages=find_packages(),
     install_requires=[],
-    url='https://github.com/xliusufe/factpy/',
+    url='https://github.com/xliusufe/eigentest/',
     author='Xu Liu',
     author_email='liu.xu@sufe.edu.cn',
     maintainer="Xu Liu",

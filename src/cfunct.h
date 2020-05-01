@@ -8,8 +8,7 @@
 
 using namespace Eigen;
 
-Eigen::MatrixXd _Cov_(Eigen::MatrixXd Data, int d);
-//double Cov(MatrixXd Data);
+Eigen::MatrixXd _MatrixPlus_(Eigen::MatrixXd Data, int d);
 
 
 #endif //EIGENTEST_H
