@@ -6,6 +6,6 @@ def generateMatrix(n):
         return "n must be a positive integer!"      
     else:  
         dims = n
-        M = np.array(RandomDxDMatrix_(dims), order="F")
+        M = numpy.array(RandomDxDMatrix_(dims), order="F")
         M.shape= dims,dims    
     return M

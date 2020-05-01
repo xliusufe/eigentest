@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : April 19, 2020
 # @Author  : Xu Liu
-# @Site    : 'https://github.com/xliusufe/factpy/'
+# @Site    : 'https://github.com/xliusufe/eigentest/'
 # @File    : __init__.py
 
 from .eigentest import generateMatrix

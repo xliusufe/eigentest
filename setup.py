@@ -1,5 +1,5 @@
 from setuptools import setup, Extension, find_packages
-import numpy as np
+import numpy
 import os
 import sys
 from os import path
