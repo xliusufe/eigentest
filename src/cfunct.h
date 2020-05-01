@@ -8,7 +8,7 @@
 
 using namespace Eigen;
 
-Eigen::MatrixXd Cov(Eigen::MatrixXd Data, int d);
+Eigen::MatrixXd _Cov_(Eigen::MatrixXd Data, int d);
 //double Cov(MatrixXd Data);
 
 

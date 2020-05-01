@@ -1,5 +1,5 @@
 from setuptools import setup, Extension, find_packages
-import numpy
+import numpy as np
 import os
 import sys
 from os import path
@@ -16,23 +16,19 @@ if sys.platform.startswith('win32'):
     path2 = "-L" + python_path + "\\libs"
     os.system('bash pre.sh ' + python_path + ' ' + version)
 
-    extensions = Extension(name='eigentest',
+    extensions = Extension(name='eigentest._EIGENTEST',
                              sources = ['src/_cfunct.cpp', 'src/cfunct.cpp'],
                              language='c++',
                              extra_compile_args=["-DNDEBUG", "-fopenmp", "-O2", "-Wall", "-std=c++11", "-mtune=generic", "-D%s" % os_type, path1, path2],
                              extra_link_args=['-lgomp'],
-                             #libraries=["vcruntime140"],
-                             #include_dirs=[numpy.get_include(), 'include','src'],
                              include_dirs=[numpy.get_include(), 'include'],
                              )
 else:
-    extensions = Extension(name='eigentest',
+    extensions = Extension(name='eigentest._EIGENTEST',
                              sources = ['src/_cfunct.cpp', 'src/cfunct.cpp'],
                              language='c++',
                              extra_compile_args=["-DNDEBUG", "-fopenmp", "-O2", "-Wall", "-std=c++11"],
                              extra_link_args=['-lgomp'],
-                             #libraries=["vcruntime140"],
-                             #include_dirs=[numpy.get_include(), 'include','src'],
                              include_dirs=[numpy.get_include(), 'include'],
                              )
                              

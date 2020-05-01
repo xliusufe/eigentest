@@ -16,7 +16,7 @@ typedef Eigen::Matrix<real_t, Eigen::Dynamic, Eigen::Dynamic> pyMatrix;
 
 static PyObject* p_eigen_python_error(NULL);
 
-static PyObject *py_randomDxDMatrix(PyObject *self, PyObject *args) {
+static PyObject *py_RandomDxDMatrix_(PyObject *self, PyObject *args) {
     PyObject* p(NULL);
     PyObject* item(NULL);    
 
@@ -29,7 +29,7 @@ static PyObject *py_randomDxDMatrix(PyObject *self, PyObject *args) {
         //Eigen::MatrixXd M = MatrixXd::Constant(d, d, 0);
         //Eigen::MatrixXd M = MatrixXd::Random(d, d);
         //pyMatrix M(d,d);
-        pyMatrix M = Cov(M1, d);
+        pyMatrix M = _Cov_(M1, d);
 
         Py_ssize_t length = d * d;
 
@@ -66,7 +66,7 @@ static char module_docs[] = "Calculates the factorial of a large integer, which 
 static char cfunction_docs[] = "Calculates the factorial of a large integer.";
 
 static PyMethodDef EigenMethods[] = {
-    {"randomDxDMatrix",  py_randomDxDMatrix, METH_VARARGS, cfunction_docs},
+    {"RandomDxDMatrix_",  py_RandomDxDMatrix_, METH_VARARGS, cfunction_docs},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
@@ -74,31 +74,14 @@ static PyMethodDef EigenMethods[] = {
 /* Module structure */
 static struct PyModuleDef eigentestmodule = {
     PyModuleDef_HEAD_INIT,
-    "eigentest",           /* name of module */
+    "_EIGENTEST",           /* name of module */
     module_docs,        /* Doc string (may be NULL) */
     -1,                 /* Size of per-interpreter state or -1 */
     EigenMethods       /* Method table */
 };
 
-/*
-PyMODINIT_FUNC initeigentest(void) {
 
-    PyObject* p;
-
-    p = Py_InitModule("eigentest", EigenMethods);
-    if (p == NULL)
-        return;
-
-    p_eigen_python_error = PyErr_NewException(
-                                const_cast<char*>("eigentest.error"), 
-                                NULL, NULL
-                            );
-    Py_INCREF(p_eigen_python_error);
-    PyModule_AddObject(p, "error", p_eigen_python_error);
-}
-*/
-
-PyMODINIT_FUNC PyInit_eigentest(void) {
+PyMODINIT_FUNC PyInit__EIGENTEST(void) {
     PyObject *object = PyModule_Create(&eigentestmodule);
     if(object == NULL) {
         return NULL;
