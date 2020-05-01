@@ -1,5 +1,5 @@
 from ._EIGENTEST import RandomDxDMatrix_
-
+import numpy
 
 def generateMatrix(n):
     if(n<=0):

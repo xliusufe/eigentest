@@ -9,11 +9,9 @@ Python package "eigentest" is a toy example for package Python including Eigen o
 # Example 1
 
 
-    import eigentest as ep
+    from eigentest import generateMatrix as gm
     import numpy as np
-    DIM = 4
-    M = np.array(ep.randomDxDMatrix(DIM), order="F")
-    M.shape= DIM,DIM
+    M = gm(5)
     print(M)
     
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : April 19, 2020
+# @Time    : May 1, 2020
 # @Author  : Xu Liu
 # @Site    : 'https://github.com/xliusufe/eigentest/'
 # @File    : __init__.py
