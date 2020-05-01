@@ -20,40 +20,30 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
     PyObject* p(NULL);
     PyObject* item(NULL);    
 
-    try{
-        int d;
-        PyArg_ParseTuple(args, "i", &d);
-        pyMatrix M1 = pyMatrix::Random(d,d);
-        pyMatrix M = _MatrixPlus_(M1, d);
-
-        Py_ssize_t length = d * d;
-
-        p = PyList_New(length);
-
-        if (p == NULL) {
-            std::stringstream msg;
-            msg << "Could not allocate a Pylist of "
-                << d << "x" << d << " = " << d*d 
-                << " size for the return Object";
-            throw std::runtime_error(msg.str().c_str());
-        } else {
-            for (Py_ssize_t i = 0; i < length; ++i) {
-                item = PyFloat_FromDouble(M.data()[i]);
-                PyList_SET_ITEM(p, i, item);
-            }            
-        }
-
-    } catch (const std::exception& e) {
-        delete p; 
-        p = NULL;
-        delete item; 
-        item = NULL;
-
-        std::string msg = ("MatrixPlus failed: ");
-        msg += e.what();
-        PyErr_SetString(PY_EIGEN_ERROR, msg.c_str());
+    int d;
+    
+    if (!PyArg_ParseTuple(args, "i", &d)){
+        return NULL;
     }
+    pyMatrix M1 = pyMatrix::Random(d,d);
+    pyMatrix M = _MatrixPlus_(M1, d);
 
+    Py_ssize_t length = d * d;
+
+    p = PyList_New(length);
+
+    if (p == NULL) {
+        std::stringstream msg;
+        msg << "Could not allocate a Pylist of "
+            << d << "x" << d << " = " << d*d 
+            << " size for the return Object";
+        throw std::runtime_error(msg.str().c_str());
+    } else {
+        for (Py_ssize_t i = 0; i < length; ++i) {
+            item = PyFloat_FromDouble(M.data()[i]);
+            PyList_SET_ITEM(p, i, item);
+        }            
+    }
     return p;
 }
 
