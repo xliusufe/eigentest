@@ -19,14 +19,23 @@ static PyObject* PY_EIGEN_ERROR(NULL);
 static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
     PyObject* p(NULL);
     PyObject* item(NULL);    
-
+	PyObject* M0_; 
+	
     int d;
     
-    if (!PyArg_ParseTuple(args, "i", &d)){
+    if (!PyArg_ParseTuple(args, "Oi", &M0_,&d)){
         return NULL;
     }
+	
+	PyObject *M0_array = PyArray_FROM_OTF(M0_, NPY_DOUBLE, NPY_IN_ARRAY);
+	if (M0_array == NULL){
+		Py_XDECREF(M0_array);
+        return NULL;
+	}
+	double *x = (double*)PyArray_DATA(M0_array);
+	pyMatrix M0 = Map<pyMatrix>(x,d,d);
     pyMatrix M1 = pyMatrix::Random(d,d);
-    pyMatrix M = _MatrixPlus_(M1, d);
+    pyMatrix M = _MatrixPlus_(M1, d)+M0;
 
     Py_ssize_t length = d * d;
 
@@ -44,6 +53,8 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
             PyList_SET_ITEM(p, i, item);
         }            
     }
+	Py_DECREF(M0_array);
+	
     return p;
 }
 

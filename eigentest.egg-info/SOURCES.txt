@@ -1,0 +1,11 @@
+MANIFEST.in
+README.md
+setup.py
+eigentest/__init__.py
+eigentest/eigentest.py
+eigentest.egg-info/PKG-INFO
+eigentest.egg-info/SOURCES.txt
+eigentest.egg-info/dependency_links.txt
+eigentest.egg-info/top_level.txt
+src/_cfunct.cpp
+src/cfunct.cpp
