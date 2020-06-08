@@ -13,29 +13,37 @@ using std::size_t;
 typedef double real_t;
 
 typedef Eigen::Matrix<real_t, Eigen::Dynamic, Eigen::Dynamic> pyMatrix;
+typedef Eigen::Matrix<real_t, Eigen::Dynamic, 1> pyVector;
 
 static PyObject* PY_EIGEN_ERROR(NULL);
 
 static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
     PyObject* p(NULL);
     PyObject* item(NULL);    
-	PyObject* M0_; 
+	PyObject* M0_,*V0_; 
 	
     int d;
     
-    if (!PyArg_ParseTuple(args, "Oi", &M0_,&d)){
+    if (!PyArg_ParseTuple(args, "OOi", &M0_,&V0_,&d)){
         return NULL;
     }
 	
 	PyObject *M0_array = PyArray_FROM_OTF(M0_, NPY_DOUBLE, NPY_IN_ARRAY);
-	if (M0_array == NULL){
+	PyObject *V0_array = PyArray_FROM_OTF(V0_, NPY_DOUBLE, NPY_IN_ARRAY);
+	if (M0_array == NULL || V0_array == NULL){
 		Py_XDECREF(M0_array);
+		Py_XDECREF(V0_array);
         return NULL;
 	}
 	double *x = (double*)PyArray_DATA(M0_array);
+	double *v = (double*)PyArray_DATA(V0_array);
+	
 	pyMatrix M0 = Map<pyMatrix>(x,d,d);
+	pyVector V0 = Map<pyVector>(v,d*d);
+	V0.resize(d,d);
+	
     pyMatrix M1 = pyMatrix::Random(d,d);
-    pyMatrix M = _MatrixPlus_(M1, d)+M0;
+    pyMatrix M = _MatrixPlus_(M1, d)+M0+V0;
 
     Py_ssize_t length = d * d;
 
@@ -54,6 +62,7 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
         }            
     }
 	Py_DECREF(M0_array);
+	Py_DECREF(V0_array);
 	
     return p;
 }
