@@ -41,8 +41,9 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
 	pyMatrix V0 = Map<pyMatrix>(v,d*d,1);
 	V0.resize(d,d);
 	
-    pyMatrix M1 = pyMatrix::Random(d,d);
-    pyMatrix M = _MatrixPlus_(M1, d)+M0+V0;
+    //pyMatrix M1 = pyMatrix::Random(d,d);
+	Eigen::MatrixXd M1 = Eigen::MatrixXd::Random(d,d);
+    pyMatrix M = _MatrixPlus_(M1,M0,V0,d);
 
     Py_ssize_t length = d * d;
 
