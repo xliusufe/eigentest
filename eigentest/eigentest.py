@@ -7,7 +7,7 @@ def generateMatrix(n):
     else:  
         dims = n
         M0 = numpy.eye(dims,dims)
-        V0 = numpy.random.randn(dims*dims,1)
+        V0 = numpy.random.randn(dims,dims)
         M = numpy.array(MatrixPlus_(M0, V0, dims), order="F")
         M.shape= dims,dims    
     return M

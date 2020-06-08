@@ -13,7 +13,6 @@ using std::size_t;
 typedef double real_t;
 
 typedef Eigen::Matrix<real_t, Eigen::Dynamic, Eigen::Dynamic> pyMatrix;
-typedef Eigen::Matrix<real_t, Eigen::Dynamic, 1> pyVector;
 
 static PyObject* PY_EIGEN_ERROR(NULL);
 
@@ -39,7 +38,7 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
 	double *v = (double*)PyArray_DATA(V0_array);
 	
 	pyMatrix M0 = Map<pyMatrix>(x,d,d);
-	pyVector V0 = Map<pyVector>(v,d*d);
+	pyMatrix V0 = Map<pyMatrix>(v,d*d,1);
 	V0.resize(d,d);
 	
     pyMatrix M1 = pyMatrix::Random(d,d);
