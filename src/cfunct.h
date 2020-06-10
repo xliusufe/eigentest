@@ -4,11 +4,10 @@
 #include <Eigen/Eigen>
 #include <Eigen/Dense>
 #include <iostream>
-#include <list>
 
 using namespace Eigen;
 
-Eigen::MatrixXd _MatrixPlus_(Eigen::MatrixXd Data, int d);
+MatrixXd _MatrixPlus_(MatrixXd &M, MatrixXd &Data, int d);
 
 
 #endif //EIGENTEST_H

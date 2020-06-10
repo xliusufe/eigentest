@@ -26,7 +26,8 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
         return NULL;
     }
     pyMatrix M1 = pyMatrix::Random(d,d);
-    pyMatrix M = _MatrixPlus_(M1, d);
+    pyMatrix M = pyMatrix::Random(d,d); 
+    _MatrixPlus_(M, M1, d);
 
     Py_ssize_t length = d * d;
 

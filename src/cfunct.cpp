@@ -1,9 +1,9 @@
 #include "cfunct.h"
 
-Eigen::MatrixXd _MatrixPlus_(Eigen::MatrixXd Data, int d)
-{
+using namespace Eigen;
 
-  Eigen::MatrixXd M = MatrixXd::Random(d,d);  
+MatrixXd _MatrixPlus_(MatrixXd &M, MatrixXd &Data, int d)
+{ 
   M = (M + Data)*50; 
   return M;
 }
