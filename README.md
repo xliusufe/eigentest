@@ -10,7 +10,6 @@ Python package "eigentest" is a toy example for Python package including Eigen o
 
 
     from eigentest import generateMatrix as gm
-    import numpy as np
     M = gm(5)
     print(M)
     

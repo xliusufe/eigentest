@@ -1,10 +1,8 @@
 #include <stdexcept>
-#include <iostream>
 #include <string>
 #include <sstream>
 #include <Python.h>
 #include <numpy/arrayobject.h>
-#include <Eigen/Dense>
 #include "cfunct.h"
 
 //using namespace Eigen;
@@ -19,15 +17,17 @@ static PyObject* PY_EIGEN_ERROR(NULL);
 static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
     PyObject* p(NULL);
     PyObject* item(NULL);    
-
+	PyObject* M0_,*V0_; 
+	
     int d;
     
-    if (!PyArg_ParseTuple(args, "i", &d)){
+    if (!PyArg_ParseTuple(args, "OOi", &M0_,&V0_,&d)){
         return NULL;
     }
     pyMatrix M1 = pyMatrix::Random(d,d);
     pyMatrix M = pyMatrix::Random(d,d); 
     _MatrixPlus_(M, M1, d);
+
 
     Py_ssize_t length = d * d;
 
@@ -45,6 +45,9 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
             PyList_SET_ITEM(p, i, item);
         }            
     }
+	Py_DECREF(M0_array);
+	Py_DECREF(V0_array);
+	
     return p;
 }
 
