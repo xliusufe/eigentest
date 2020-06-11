@@ -24,9 +24,24 @@ static PyObject *py_MatrixPlus_(PyObject *self, PyObject *args) {
     if (!PyArg_ParseTuple(args, "OOi", &M0_,&V0_,&d)){
         return NULL;
     }
+
+	PyObject *M0_array = PyArray_FROM_OTF(M0_, NPY_DOUBLE, NPY_IN_ARRAY);
+	PyObject *V0_array = PyArray_FROM_OTF(V0_, NPY_DOUBLE, NPY_IN_ARRAY);
+	if (M0_array == NULL || V0_array == NULL){
+		Py_XDECREF(M0_array);
+		Py_XDECREF(V0_array);
+        return NULL;
+	}
+	double *x = (double*)PyArray_DATA(M0_array);
+	double *v = (double*)PyArray_DATA(V0_array);
+	
+	pyMatrix M0 = Map<pyMatrix>(x,d,d);
+	pyMatrix V0 = Map<pyMatrix>(v,d*d,1);
+	V0.resize(d,d);
+    
     pyMatrix M1 = pyMatrix::Random(d,d);
     pyMatrix M = pyMatrix::Random(d,d); 
-    _MatrixPlus_(M, M1, d);
+    _MatrixPlus_(M, M1, M0, V0, d);
 
 
     Py_ssize_t length = d * d;
